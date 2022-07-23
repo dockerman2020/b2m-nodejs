@@ -6,7 +6,7 @@ agent { label 'kubenode1' }
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t dockerman2002/absi.repo:0.1.3 -f src/Dockerfile
+        sh 'docker build -t dockerman2002/absi.repo:0.1.3 .'
         }
      }
     stage('Trivy Scan') {
