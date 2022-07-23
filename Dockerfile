@@ -18,7 +18,7 @@ RUN apk add --no-cache curl wget bash \
 ENV SYSDIG_AGENT_CONF 'app_checks: [{name: node, check_module: prometheus, pattern: {comm: node}, conf: { url: "http://localhost:3001/metrics" }}]'
 
 # Bundle app source
-COPY server.js /app
+COPY ./src/server.js /app
 
 EXPOSE 3001
 CMD [ "npm", "start", "server.js" ]
