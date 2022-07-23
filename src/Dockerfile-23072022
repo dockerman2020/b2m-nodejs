@@ -8,9 +8,8 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
-#RUN npm install
-RUN apk add --no-cache curl wget bash \
-    && npm install
+RUN npm install
+RUN apk add --no-cache curl wget bash
 # If you are building your code for production
 # RUN npm install --only=production
 #================================================================================
