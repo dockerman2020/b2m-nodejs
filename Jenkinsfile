@@ -6,7 +6,7 @@ agent { label 'kubenode1' }
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t dockerman2002/absi.repo:latest .'
+        sh 'docker build -t dockerman2002/absi.repo:0.1.3 -f src/Dockerfile
         }
      }
     stage('Trivy Scan') {
@@ -18,12 +18,12 @@ agent { label 'kubenode1' }
                 sh 'curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /tmp v0.21.1'
              // sh 'echo Trivy downloaded'
              sh 'curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl > /tmp/html.tpl'
-             sh '/tmp/trivy image dockerman2002/absi.repo:latest'
+             sh '/tmp/trivy image dockerman2002/absi.repo:0.1.3'
              
              // Scan all vuln levels
                 sh 'mkdir -p reports'
              // sh '/tmp/trivy filesystem --ignore-unfixed --vuln-type os,library --format template --template "/tmp/html.tpl" -o /tmp/nodejs-scan.html /usr/bin/nodejs'
-                sh '/tmp/trivy image --format template --template "@/tmp/html.tpl" -o /tmp/report-javaweb-scan.html dockerman2002/absi.repo:latest'
+                sh '/tmp/trivy image --format template --template "@/tmp/html.tpl" -o /tmp/report-javaweb-scan.html dockerman2002/absi.repo:0.1.3'
                 publishHTML target : [
                   allowMissing: true,
                     alwaysLinkToLastBuild: true,
